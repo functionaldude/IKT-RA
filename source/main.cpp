@@ -8,9 +8,12 @@
 
 int main()
 {
-    while(1)
-    {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-noreturn"
+    while(1) {
+
         testBlinkingActLED(WAIT_DELAY);
     }
+#pragma clang diagnostic pop
     return 0;
 }
