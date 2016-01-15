@@ -11,9 +11,8 @@ set(SOURCE_FILES
         source/helper.cpp
         source/helper.h
         source/BCM2835.h
-        source/uart.c
         source/gpio.c
         source/gpio.h
-        source/uart.h
         source/init.s)
+
 add_executable(MorsePi ${SOURCE_FILES})
