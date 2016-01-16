@@ -5,6 +5,7 @@
  *      Author: franz
  */
 
+#include "uart.h"
 #include <stddef.h>
 #include <stdint.h>
 #include "mmio.h"

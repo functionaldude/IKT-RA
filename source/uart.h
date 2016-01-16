@@ -17,7 +17,7 @@ void uart_init(void);
 * Transmit a byte via UART0.
 * uint8_t Byte: byte to send.
 */
-void putc(uint8_t byte);
+void uart_putc(uint8_t byte);
 
 /*
 * Receive a byte via UART0.
@@ -25,12 +25,12 @@ void putc(uint8_t byte);
 * Returns:
 * uint8_t: byte received.
 */
-uint8_t getc(void);
+uint8_t uart_getc(void);
 
 /*
 * print a string to the UART one character at a time
 * const char *str: 0-terminated string
 */
-void puts(const char *str);
+void uart_puts(const char *str);
 
 #endif //MORSEPI_UART_H

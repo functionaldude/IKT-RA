@@ -12,6 +12,7 @@
 ARMGNU ?= arm-none-eabi
 
 X = 0
+SERIAL = tty.usbserial-FTGADXT0
 ifdef USB
 	X = $(USB)
 endif
@@ -84,7 +85,7 @@ raspbootcom :
 	$(MAKE) -C ../raspbootin/raspbootcom all
 
 load :
-	sudo raspbootcom /dev/ttyUSB$(X) kernel.img;
+	sudo raspbootcom /dev/$(SERIAL) kernel.img;
 	
 help :
 	@echo ""

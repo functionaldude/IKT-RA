@@ -8,6 +8,7 @@
 
 class Logger {
 public:
+    static void init();
     static void print(const char * input);
 };
 

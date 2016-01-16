@@ -10,6 +10,8 @@ int main()
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
+    Logger::init();
+
     Logger::print("Program started");
     while(1) {
         testBlinkingActLED(WAIT_DELAY);
