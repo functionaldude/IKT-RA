@@ -2,8 +2,6 @@
 #include <stdint.h>
 
 #include "testcases.h"
-#include "helper.h"
-#include "uart.h"
 
 #define WAIT_DELAY      	0x1F0000
 
