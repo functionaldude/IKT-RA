@@ -7,12 +7,12 @@ set(SOURCE_FILES
         source/main.cpp
         source/testcases.cpp
         source/testcases.h
-        source/timer.h
         source/helper.cpp
         source/helper.h
         source/BCM2835.h
         source/gpio.c
         source/gpio.h
-        source/init.s)
+        source/init.s
+        source/uart.c source/uart.h source/mmio.h source/delay.h source/delay.c)
 
 add_executable(MorsePi ${SOURCE_FILES})
