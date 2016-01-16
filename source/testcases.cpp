@@ -5,7 +5,9 @@
  */
 #include "testcases.h"
 #include "helper.h"
-#include "gpio.h"
+extern "C"{
+    #include "gpio.h"
+}
 
 /*
 #define GPIO_FSEL_ADDR 0x20200000
