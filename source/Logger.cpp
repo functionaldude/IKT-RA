@@ -8,13 +8,24 @@ extern "C" {
 }
 
 void Logger::print(const char *input) {
-    //TODO: optimize
-    uart_puts("LOG: ");
     uart_puts(input);
-    uart_putc('\n');
 }
 
 void Logger::init() {
     uart_init();
     uart_putc('\n');
+}
+
+void Logger::debug(const char *input) {
+    uart_puts("DEBUG: ");
+    uart_puts(input);
+    uart_putc('\n');
+}
+
+void Logger::assert(bool var, const char *a_name) {
+    if (!var){
+        uart_puts("ASSERTION at ");
+        uart_puts(a_name);
+        uart_putc('\n');
+    }
 }
