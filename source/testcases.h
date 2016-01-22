@@ -10,6 +10,8 @@
 
 
 void testBlinkingActLED(volatile uint32_t mean_period);
-
+void TestMorseLED(void);
+void TestKnightRider(void);
+void TestPiFaceRead(void);
 
 #endif /* SOURCE_TESTCASES_H_ */

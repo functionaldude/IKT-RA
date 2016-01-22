@@ -3,11 +3,20 @@
  *
  *  Created on: Nov 11, 2014
  */
-#include "testcases.h"
-#include "helper.h"
-extern "C"{
-    #include "gpio.h"
+#include <stdint.h>
+extern "C" {
+#include "delay.h"
+#include "gpio.h"
+#include "piface.h"
+#include "uart.h"
 }
+
+#include "Logger.h"
+#include "MorseHandler.h"
+#include "helper.h"
+
+
+#define WAIT_DELAY      	0x1F0000
 
 /*
 #define GPIO_FSEL_ADDR 0x20200000
@@ -63,4 +72,74 @@ void testBlinkingActLED(volatile uint32_t mean_period)
     }
 #pragma clang diagnostic pop
 }
+
+void TestMorseLED(void)
+{
+    // TESTCASE Morse-blinking LED
+    //testBlinkingActLED(WAIT_DELAY);
+    Logger::print("printing");
+    delay(WAIT_DELAY);
+    MorseHandler::morse_puts("SOS\0");
+    Logger::print("string printed");
+    delay(WAIT_DELAY*8);
+}
+
+void TestKnightRider(void)
+{
+    //TESTCASE PiFace KnightRider
+    piface_SetON(PIFACE_PIN0);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN0);
+    piface_SetON(PIFACE_PIN1);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN1);
+    piface_SetON(PIFACE_PIN2);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN2);
+    piface_SetON(PIFACE_PIN3);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN3);
+    piface_SetON(PIFACE_PIN4);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN4);
+    piface_SetON(PIFACE_PIN5);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN5);
+    piface_SetON(PIFACE_PIN6);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN6);
+    piface_SetON(PIFACE_PIN7);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN7);
+    piface_SetON(PIFACE_PIN6);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN6);
+    piface_SetON(PIFACE_PIN5);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN5);
+    piface_SetON(PIFACE_PIN4);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN4);
+    piface_SetON(PIFACE_PIN3);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN3);
+    piface_SetON(PIFACE_PIN2);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN2);
+    piface_SetON(PIFACE_PIN1);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN1);
+}
+
+void TestPiFaceRead(void)
+{
+    //TESTCASE Reading from PiFace
+    unsigned char rx = piface_Read(PIFACE_IODIRA);
+    Logger::print("I received some shit.");
+    delay(WAIT_DELAY);
+    uart_putc(rx); //should be 0xFF
+    uart_putc('\n');
+    delay(WAIT_DELAY);
+}
+
 

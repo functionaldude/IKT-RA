@@ -8,6 +8,7 @@
 extern "C" {
 #include "gpio.h"
 #include "delay.h"
+#include "piface.h"
 }
 
 #define DELAY_SHORT 0x1F0000
@@ -69,13 +70,14 @@ void MorseHandler::gap_short() {
     delay(DELAY_SHORT);
 }
 
-//TODO: insert SPI function
 void MorseHandler::HIGH() {
-    LED_OFF();
+    //LED_OFF();
+    piface_Write(PIFACE_GPIOA,0xFF);
 }
 
 void MorseHandler::LOW() {
-    LED_ON();
+    //LED_ON();
+    piface_Write(PIFACE_GPIOA,0x00);
 }
 
 //character functions
