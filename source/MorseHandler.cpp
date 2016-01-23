@@ -329,11 +329,13 @@ void MorseHandler::Z() {
 }
 
 void MorseHandler::morse_puts(const char *input) {
+    piface_Write(PIFACE_IODIRA,0x00);
     uint16_t ctn = 0;
     while (input[ctn] != '\0'){
         characters[input[ctn++] - 'A']();
         gap_inter();
     }
+    piface_Write(PIFACE_IODIRA,0xFF);
 }
 
 uint8_t MorseHandler::listen(){
