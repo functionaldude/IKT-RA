@@ -377,6 +377,7 @@ uint8_t MorseHandler::listen() {
         rx = piface_Read(PIFACE_GPIOA);
         if (cnt_lo > 3*DELAY_SHORT) return 2;
     }
+    return 0xFF;
 }
 
 void MorseHandler::ZERO() {
