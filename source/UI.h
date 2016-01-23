@@ -20,6 +20,8 @@ private:
     static void receive();
 
     static void getUserInput(char *out);
+
+    static void startKnightRider();
 public:
     static void start();
 };

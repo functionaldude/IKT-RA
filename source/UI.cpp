@@ -9,6 +9,8 @@
 
 extern "C"{
 #include "uart.h"
+#include "piface.h"
+#include "delay.h"
 }
 
 char UI::msg[BUFFER];
@@ -87,6 +89,65 @@ void UI::start() {
                 Logger::print("Message received\n");
             }
         }
+        if (strcmp(cmd, "knightrider") == 0){
+            uint8_t ctn = 10;
+            while (ctn--){
+                startKnightRider();
+            }
+        }
     }
 #pragma clang diagnostic pop
+}
+
+void UI::startKnightRider()
+{
+#define WAIT_DELAY 0x1F0000
+    piface_Write(PIFACE_IODIRA, 0x00);
+
+    piface_SetON(PIFACE_PIN0);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN0);
+    piface_SetON(PIFACE_PIN1);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN1);
+    piface_SetON(PIFACE_PIN2);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN2);
+    piface_SetON(PIFACE_PIN3);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN3);
+    piface_SetON(PIFACE_PIN4);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN4);
+    piface_SetON(PIFACE_PIN5);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN5);
+    piface_SetON(PIFACE_PIN6);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN6);
+    piface_SetON(PIFACE_PIN7);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN7);
+    piface_SetON(PIFACE_PIN6);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN6);
+    piface_SetON(PIFACE_PIN5);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN5);
+    piface_SetON(PIFACE_PIN4);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN4);
+    piface_SetON(PIFACE_PIN3);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN3);
+    piface_SetON(PIFACE_PIN2);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN2);
+    piface_SetON(PIFACE_PIN1);
+    delay(WAIT_DELAY/8);
+    piface_SetOFF(PIFACE_PIN1);
+
+    piface_Write(PIFACE_IODIRA, 0x01);
+
+#undef WAIT_DELAY
 }
