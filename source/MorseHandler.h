@@ -8,6 +8,10 @@
 
 #include <stdint.h>
 
+#define UNIT 0xF8000
+#define DELAY_SHORT (1*UNIT)
+#define DELAY_LONG  (3*UNIT)
+
 class MorseHandler {
 private:
     //character functions
@@ -62,8 +66,7 @@ private:
     static void mark_short();
     static void mark_long();
     static void gap_inter();
-    static void gap_long();
-    static void gap_short();
+    static void gap_char();
 
 public:
     static void init();

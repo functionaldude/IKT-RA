@@ -11,9 +11,6 @@ extern "C" {
 #include "piface.h"
 }
 
-#define DELAY_SHORT 0x1F0000
-#define DELAY_LONG  (3*DELAY_SHORT)
-
 void (*MorseHandler::characters[26]) ();
 void (*MorseHandler::numbers[10]) ();
 char MorseHandler::reverseTable[3][3][3][3][3];
@@ -111,15 +108,11 @@ void MorseHandler::mark_long() {
 }
 
 void MorseHandler::gap_inter() {
-    delay(DELAY_SHORT / 2);
+    delay(UNIT);
 }
 
-void MorseHandler::gap_long() {
-    delay(DELAY_SHORT * 2);
-}
-
-void MorseHandler::gap_short() {
-    delay(DELAY_SHORT);
+void MorseHandler::gap_char() {
+    delay(UNIT * 3);
 }
 
 void MorseHandler::HIGH() {
