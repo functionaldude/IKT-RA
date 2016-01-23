@@ -12,7 +12,7 @@ extern "C" {
 }
 
 #define DELAY_SHORT 0x1F0000
-#define DELAY_LONG  3*DELAY_SHORT
+#define DELAY_LONG  (3*DELAY_SHORT)
 
 void (*MorseHandler::characters[26]) ();
 
@@ -71,12 +71,12 @@ void MorseHandler::gap_short() {
 }
 
 void MorseHandler::HIGH() {
-    //LED_OFF();
+    LED_OFF();
     piface_Write(PIFACE_GPIOA,0xFF);
 }
 
 void MorseHandler::LOW() {
-    //LED_ON();
+    LED_ON();
     piface_Write(PIFACE_GPIOA,0x00);
 }
 

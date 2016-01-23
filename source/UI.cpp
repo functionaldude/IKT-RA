@@ -23,7 +23,9 @@ void UI::getUserInput() {
     Logger::assert(msg_size == 0, "msg_size != 0");
 
     Logger::print("Please input your message and press ENTER.\n");
-    while ((msg[msg_size++] = uart_getc()) != '\n');
+    while ((msg[msg_size++] = uart_getc()) != '\n'){
+        uart_putc((uint8_t) msg[msg_size-1]);
+    }
     Logger::debug(msg);
 }
 
