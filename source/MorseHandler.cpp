@@ -363,15 +363,15 @@ uint8_t MorseHandler::listen() {
     uint16_t cnt_lo = 0;
     unsigned char rx = piface_Read(PIFACE_GPIOA);
     while (rx) {
-            cnt_hi++;
-            rx = piface_Read(PIFACE_GPIOA);
+        cnt_hi++;
+        rx = piface_Read(PIFACE_GPIOA);
     }
-        if (0 < cnt_hi < DELAY_SHORT * 2) {
-            return 0;
-        }
-        else if(cnt_hi){
-            return 1;
-        }
+    if (0 < cnt_hi && cnt_hi < DELAY_SHORT * 2) {
+        return 0;
+    }
+    else if(cnt_hi){
+        return 1;
+    }
     while (!rx){
         cnt_lo++;
         rx = piface_Read(PIFACE_GPIOA);
