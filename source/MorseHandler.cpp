@@ -16,6 +16,7 @@ extern "C" {
 
 void (*MorseHandler::characters[26]) ();
 void (*MorseHandler::numbers[10]) ();
+char MorseHandler::reverseTable[3][3][3][3][3];
 
 void MorseHandler::init() {
     characters[0] = &MorseHandler::A;
@@ -55,6 +56,45 @@ void MorseHandler::init() {
     numbers[7] = &MorseHandler::SEVEN;
     numbers[8] = &MorseHandler::EIGHT;
     numbers[9] = &MorseHandler::NINE;
+
+    reverseTable[0][1][2][0][0] = 'A';
+    reverseTable[1][0][0][0][2] = 'B';
+    reverseTable[1][0][1][0][2] = 'C';
+    reverseTable[1][0][0][2][0] = 'D';
+    reverseTable[0][2][0][0][0] = 'E';
+    reverseTable[0][0][1][0][2] = 'F';
+    reverseTable[1][1][0][2][0] = 'G';
+    reverseTable[0][0][0][0][2] = 'H';
+    reverseTable[0][0][2][0][0] = 'I';
+    reverseTable[0][1][1][1][2] = 'J';
+    reverseTable[1][0][1][2][0] = 'K';
+    reverseTable[0][1][0][0][2] = 'L';
+    reverseTable[1][1][2][0][0] = 'M';
+    reverseTable[1][0][2][0][0] = 'N';
+    reverseTable[1][1][1][2][0] = 'O';
+    reverseTable[0][1][1][0][2] = 'P';
+    reverseTable[1][1][0][1][2] = 'Q';
+    reverseTable[0][1][0][2][0] = 'R';
+    reverseTable[0][0][0][2][0] = 'S';
+    reverseTable[1][2][0][0][0] = 'T';
+    reverseTable[1][1][0][2][0] = 'U';
+    reverseTable[0][0][0][1][2] = 'V';
+    reverseTable[0][1][1][2][0] = 'W';
+    reverseTable[1][0][0][1][2] = 'X';
+    reverseTable[1][0][1][1][2] = 'Y';
+    reverseTable[1][1][0][0][2] = 'Z';
+
+
+    reverseTable[1][1][1][1][1] = '0';
+    reverseTable[0][1][1][1][1] = '1';
+    reverseTable[0][0][1][1][1] = '2';
+    reverseTable[0][0][0][1][1] = '3';
+    reverseTable[0][0][0][0][1] = '4';
+    reverseTable[0][0][0][0][0] = '5';
+    reverseTable[1][0][0][0][0] = '6';
+    reverseTable[1][1][0][0][0] = '7';
+    reverseTable[1][1][1][0][0] = '8';
+    reverseTable[1][1][1][1][0] = '9';
 }
 
 
@@ -356,6 +396,15 @@ void MorseHandler::morse_puts(const char *input){
         }
     }
     piface_Write(PIFACE_IODIRA, 0xFF);
+}
+
+char MorseHandler::morse_getc() {
+    uint8_t buffer[6] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    uint8_t ctn = 0;
+
+    while ((buffer[ctn++] = listen()) != 2);
+
+    return reverseTable[buffer[0]][buffer[1]][buffer[2]][buffer[3]][buffer[4]];
 }
 
 uint8_t MorseHandler::listen() {

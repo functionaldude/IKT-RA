@@ -53,6 +53,7 @@ private:
 
     static void (*characters[26]) ();
     static void (*numbers[10]) ();
+    static char reverseTable[3][3][3][3][3];
 
     //setter functions
     static void HIGH();
@@ -64,11 +65,11 @@ private:
     static void gap_long();
     static void gap_short();
 
-
 public:
     static void init();
 
     static void morse_puts(const char * input);
+    static char morse_getc();
 
     static uint8_t listen();
 
