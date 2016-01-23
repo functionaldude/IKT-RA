@@ -17,14 +17,7 @@ int main()
 
     Logger::debug("Program started");
 
-
-    while(1) {
-        //TestMorseLED();
-        //TestKnightRider();
-        UI::getUserInput();
-        UI::send();
-
-    }
+    UI::start();
 #pragma clang diagnostic pop
     return 0;
 }

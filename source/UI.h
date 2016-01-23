@@ -7,13 +7,17 @@
 
 #include <stdint.h>
 
+#define BUFFER 1024
+
 class UI {
 private:
-    static char msg[1024];
-    static uint16_t msg_size;
-public:
+    static char msg[BUFFER];
+    static char cmd[BUFFER];
+
     static void send();
-    static void getUserInput();
+    static void getUserInput(char *out);
+public:
+    static void start();
 };
 
 
