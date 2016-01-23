@@ -15,6 +15,7 @@ extern "C" {
 #define DELAY_LONG  (3*DELAY_SHORT)
 
 void (*MorseHandler::characters[26]) ();
+void (*MorseHandler::numbers[10]) ();
 
 void MorseHandler::init() {
     characters[0] = &MorseHandler::A;
@@ -43,6 +44,17 @@ void MorseHandler::init() {
     characters[23] = &MorseHandler::X;
     characters[24] = &MorseHandler::Y;
     characters[25] = &MorseHandler::Z;
+
+    numbers[0] = &MorseHandler::ZERO;
+    numbers[1] = &MorseHandler::ONE;
+    numbers[2] = &MorseHandler::TWO;
+    numbers[3] = &MorseHandler::THREE;
+    numbers[4] = &MorseHandler::FOUR;
+    numbers[5] = &MorseHandler::FIVE;
+    numbers[6] = &MorseHandler::SIX;
+    numbers[7] = &MorseHandler::SEVEN;
+    numbers[8] = &MorseHandler::EIGHT;
+    numbers[9] = &MorseHandler::NINE;
 }
 
 
@@ -328,14 +340,22 @@ void MorseHandler::Z() {
     mark_short();
 }
 
-void MorseHandler::morse_puts(const char *input) {
-    piface_Write(PIFACE_IODIRA,0x00);
+void MorseHandler::morse_puts(const char *input){
+    piface_Write(PIFACE_IODIRA, 0x00);
     uint16_t ctn = 0;
-    while (input[ctn] != '\0'){
-        characters[input[ctn++] - 'A']();
-        gap_inter();
+    while (input[ctn] != '\0' && input[ctn] != '\n') {
+        if ('0' <= input[ctn] && input[ctn] <= '9') {
+            numbers[input[ctn++] - '0']();
+            gap_inter();
+        } else if ('A' <= input[ctn] && input[ctn] <= 'Z') {
+            characters[input[ctn++] - 'A']();
+            gap_inter();
+        } else {
+            ctn++;
+            Logger::debug("Unknown character");
+        }
     }
-    piface_Write(PIFACE_IODIRA,0xFF);
+    piface_Write(PIFACE_IODIRA, 0xFF);
 }
 
 uint8_t MorseHandler::listen(){
@@ -351,4 +371,155 @@ uint8_t MorseHandler::listen(){
         else{
             return 1;
         }
+}
+
+void MorseHandler::ZERO() {
+    mark_long();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_long();
+}
+void MorseHandler::ONE() {
+    mark_short();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_long();
+}
+void MorseHandler::TWO() {
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_long();
+}
+void MorseHandler::THREE() {
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_long();
+}
+void MorseHandler::FOUR() {
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_long();
+}
+void MorseHandler::FIVE() {
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+}
+void MorseHandler::SIX() {
+    mark_long();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+}
+void MorseHandler::SEVEN() {
+    mark_long();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+}
+void MorseHandler::EIGHT() {
+    mark_long();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
+}
+void MorseHandler::NINE() {
+    mark_long();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_long();
+    gap_inter();
+
+    mark_short();
+    gap_inter();
+
+    mark_short();
 }

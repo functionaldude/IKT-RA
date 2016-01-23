@@ -26,7 +26,7 @@ void UI::getUserInput() {
     while ((msg[msg_size++] = uart_getc()) != '\n'){
         uart_putc((uint8_t) msg[msg_size-1]);
     }
-    Logger::debug(msg);
+    uart_putc('\n');
 }
 
 

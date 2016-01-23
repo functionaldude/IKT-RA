@@ -38,9 +38,21 @@ private:
     static void Y();
     static void Z();
 
+    static void ONE();
+    static void TWO();
+    static void THREE();
+    static void FOUR();
+    static void FIVE();
+    static void SIX();
+    static void SEVEN();
+    static void EIGHT();
+    static void NINE();
+    static void ZERO();
+
     //TODO: numbers
 
     static void (*characters[26]) ();
+    static void (*numbers[10]) ();
 
     //setter functions
     static void HIGH();
