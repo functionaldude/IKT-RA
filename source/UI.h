@@ -14,7 +14,11 @@ private:
     static char msg[BUFFER];
     static char cmd[BUFFER];
 
+    static uint8_t received;
+
     static void send();
+    static void receive();
+
     static void getUserInput(char *out);
 public:
     static void start();

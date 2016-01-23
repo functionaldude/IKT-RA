@@ -13,6 +13,22 @@ set(SOURCE_FILES
         source/gpio.c
         source/gpio.h
         source/init.s
-        source/uart.c source/uart.h source/mmio.h source/delay.h source/delay.c source/Logger.cpp source/Logger.h source/InputHandler.cpp source/InputHandler.h source/MorseHandler.cpp source/MorseHandler.h source/UI.cpp source/UI.h)
+        source/uart.c
+        source/uart.h
+        source/mmio.h
+        source/delay.h
+        source/delay.c
+        source/Logger.cpp
+        source/Logger.h
+        source/InputHandler.cpp
+        source/InputHandler.h
+        source/MorseHandler.cpp
+        source/MorseHandler.h
+        source/UI.cpp
+        source/UI.h
+        source/spi.h
+        source/spi.c
+        source/piface.h
+        source/piface.c)
 
 add_executable(MorsePi ${SOURCE_FILES})

@@ -14,6 +14,9 @@ extern "C"{
 char UI::msg[BUFFER];
 char UI::cmd[BUFFER];
 
+uint8_t UI::received;
+
+
 int strcmp(const char *str1, const char *str2)
 {
     int s1;
@@ -54,6 +57,15 @@ void UI::send() {
     Logger::print("Message successfully sent\n");
 }
 
+void UI::receive() {
+    char tmp;
+    while ((tmp = MorseHandler::morse_getc()) != '\0'){
+        received = 1;
+        Logger::putc(tmp);
+    }
+    Logger::putc('\n');
+}
+
 void UI::start() {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-noreturn"
@@ -68,7 +80,12 @@ void UI::start() {
         }
         if (strcmp(cmd, "receive") == 0){
             Logger::print("Waiting for message\n");
-
+            receive();
+            if (received == 0){
+                Logger::print("Timeout\n");
+            } else {
+                Logger::print("Message received\n");
+            }
         }
     }
 #pragma clang diagnostic pop

@@ -394,21 +394,27 @@ void MorseHandler::morse_puts(const char *input){
 char MorseHandler::morse_getc() {
     uint8_t buffer[6] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     uint8_t ctn = 0;
+    uint32_t timeCtn = 0;
 
+    uint8_t tmp = 2;
+    while ((tmp = listen()) == 2){
+        if (timeCtn++ >= 20) return '\0';
+    }
+    buffer[ctn++] = tmp;
     while ((buffer[ctn++] = listen()) != 2);
 
     return reverseTable[buffer[0]][buffer[1]][buffer[2]][buffer[3]][buffer[4]];
 }
 
 uint8_t MorseHandler::listen() {
-    uint16_t cnt_hi = 0;
-    uint16_t cnt_lo = 0;
+    uint32_t cnt_hi = 0;
+    uint32_t cnt_lo = 0;
     unsigned char rx = piface_Read(PIFACE_GPIOA);
     while (rx) {
         cnt_hi++;
         rx = piface_Read(PIFACE_GPIOA);
     }
-    if (0 < cnt_hi && cnt_hi < DELAY_SHORT * 2) {
+    if (0 < cnt_hi && cnt_hi < UNIT * 2) {
         return 0;
     }
     else if(cnt_hi){
@@ -417,7 +423,7 @@ uint8_t MorseHandler::listen() {
     while (!rx){
         cnt_lo++;
         rx = piface_Read(PIFACE_GPIOA);
-        if (cnt_lo > 3*DELAY_SHORT) return 2;
+        if (cnt_lo > 2*UNIT) return 2;
     }
     return 0xFF;
 }

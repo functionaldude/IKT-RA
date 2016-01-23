@@ -10,6 +10,7 @@ class Logger {
 public:
     static void init();
     static void print(const char * input);
+    static void putc(char input);
     static void debug(const char * input);
     static void assert(bool var, const char * a_name);
 };
