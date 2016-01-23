@@ -15,8 +15,9 @@ char UI::msg[1024];
 uint16_t UI::msg_size = 0;
 
 void UI::getUserInput() {
+
     while (msg[0] != 0){
-        msg[msg_size--] = 0;
+        msg[--msg_size] = 0;
     }
 
     Logger::assert(msg_size == 0, "msg_size != 0");

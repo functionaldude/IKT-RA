@@ -5,6 +5,9 @@
 #ifndef MORSEPI_MORSEHANDLER_H
 #define MORSEPI_MORSEHANDLER_H
 
+
+#include <stdint.h>
+
 class MorseHandler {
 private:
     //character functions
@@ -54,6 +57,8 @@ public:
     static void init();
 
     static void morse_puts(const char * input);
+
+    static uint8_t listen();
 
 };
 

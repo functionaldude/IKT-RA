@@ -33,7 +33,7 @@ extern "C" {
 #define mmio32(x) (*(volatile uint32_t*) (x))
 */
 
-void testBlinkingActLED(volatile uint32_t mean_period)
+void TestBlinkingActLED(volatile uint32_t mean_period)
 {
     // set as output
     //mmio32(GPIO_FSEL_ADDR + GPFSEL1_OFFS) |= (1<<LED_BIT_SET);
@@ -76,7 +76,7 @@ void testBlinkingActLED(volatile uint32_t mean_period)
 void TestMorseLED(void)
 {
     // TESTCASE Morse-blinking LED
-    //testBlinkingActLED(WAIT_DELAY);
+    //TestBlinkingActLED(WAIT_DELAY);
     Logger::print("printing");
     delay(WAIT_DELAY);
     MorseHandler::morse_puts("SOS\0");

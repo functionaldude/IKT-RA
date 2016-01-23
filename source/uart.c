@@ -2,7 +2,6 @@
  * uart.c
  *
  *  Created on: 28.12.2015
- *      Author: franz
  */
 
 #include "uart.h"

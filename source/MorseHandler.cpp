@@ -12,7 +12,7 @@ extern "C" {
 }
 
 #define DELAY_SHORT 0x1F0000
-#define DELAY_LONG  0x310000
+#define DELAY_LONG  3*DELAY_SHORT
 
 void (*MorseHandler::characters[26]) ();
 
@@ -334,4 +334,19 @@ void MorseHandler::morse_puts(const char *input) {
         characters[input[ctn++] - 'A']();
         gap_inter();
     }
+}
+
+uint8_t MorseHandler::listen(){
+    uint16_t cnt = 0;
+    unsigned char rx = piface_Read(PIFACE_GPIOA);
+    while (rx) {
+            cnt++;
+            rx = piface_Read(PIFACE_GPIOA);
+        }
+        if (cnt < DELAY_SHORT*2){
+            return 0;
+        }
+        else{
+            return 1;
+        }
 }
