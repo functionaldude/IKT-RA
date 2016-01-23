@@ -358,19 +358,25 @@ void MorseHandler::morse_puts(const char *input){
     piface_Write(PIFACE_IODIRA, 0xFF);
 }
 
-uint8_t MorseHandler::listen(){
-    uint16_t cnt = 0;
+uint8_t MorseHandler::listen() {
+    uint16_t cnt_hi = 0;
+    uint16_t cnt_lo = 0;
     unsigned char rx = piface_Read(PIFACE_GPIOA);
     while (rx) {
-            cnt++;
+            cnt_hi++;
             rx = piface_Read(PIFACE_GPIOA);
-        }
-        if (cnt < DELAY_SHORT*2){
+    }
+        if (0 < cnt_hi < DELAY_SHORT * 2) {
             return 0;
         }
-        else{
+        else if(cnt_hi){
             return 1;
         }
+    while (!rx){
+        cnt_lo++;
+        rx = piface_Read(PIFACE_GPIOA);
+        if (cnt_lo > 3*DELAY_SHORT) return 2;
+    }
 }
 
 void MorseHandler::ZERO() {
