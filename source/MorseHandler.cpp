@@ -379,10 +379,10 @@ void MorseHandler::morse_puts(const char *input){
     while (input[ctn] != '\0' && input[ctn] != '\n') {
         if ('0' <= input[ctn] && input[ctn] <= '9') {
             numbers[input[ctn++] - '0']();
-            gap_inter();
+            gap_char();
         } else if ('A' <= input[ctn] && input[ctn] <= 'Z') {
             characters[input[ctn++] - 'A']();
-            gap_inter();
+            gap_char();
         } else {
             ctn++;
             Logger::debug("Unknown character");
