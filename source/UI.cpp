@@ -54,6 +54,9 @@ void UI::getUserInput(char *out) {
 }
 
 void UI::send() {
+    for (uint16_t ctn = 0; msg[ctn] != 0x00; ++ctn){
+        if ('a' <= msg[ctn] && msg[ctn] <= 'z') msg[ctn] = msg[ctn] - 'a' + 'A';
+    }
     Logger::print("Sending message, please wait\n");
     MorseHandler::morse_puts(msg);
     Logger::print("Message successfully sent\n");
