@@ -17,6 +17,12 @@ int main()
 
     Logger::debug("Program started");
 
+    /*
+    while (1){
+        MorseHandler::morse_puts("SOS\0");
+    }
+     */
+
     UI::start();
     //piface_SetAsOutput(PIFACE_PIN0);
     //piface_SetON(PIFACE_PIN0);

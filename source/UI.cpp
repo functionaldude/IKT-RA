@@ -63,11 +63,13 @@ void UI::send() {
 }
 
 void UI::receive() {
-    char tmp;
-    while ((tmp = MorseHandler::morse_getc()) != '\0'){
-        received = 1;
-        //Logger::putc(tmp);
-    }
+    memset(msg, 0x00, BUFFER);
+    uint16_t ctn = 0;
+    while ((msg[ctn++] = MorseHandler::morse_getc()) != '\0');
+
+    if (msg[0] != 0x00) received = 1;
+
+    Logger::print(msg);
     Logger::putc('\n');
 }
 
