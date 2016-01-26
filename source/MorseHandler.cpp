@@ -397,17 +397,17 @@ char MorseHandler::morse_getc() {
     uint8_t tmp;
     while ((tmp = listen()) == 2) {
             if (timeCtn++ >= 20) return '\0';
-        //Logger::putc(tmp+'0');
+        Logger::putc(tmp+'0');
         }
-    while ((buffer[ctn++] = listen()) != 2); //Logger::putc(buffer[ctn]+'0');
+    while ((buffer[ctn++] = listen()) != 2) Logger::putc(buffer[ctn]+'0');
 
     return reverseTable[buffer[0]][buffer[1]][buffer[2]][buffer[3]][buffer[4]];
 
 }
 
 uint8_t MorseHandler::listen() {
-    uint64_t cnt_hi = 0;
-    uint64_t cnt_lo = 0;
+    volatile uint32_t cnt_hi = 0;
+    volatile uint32_t cnt_lo = 0;
     //unsigned char rx = piface_ReadPin(PIFACE_PIN7);
     unsigned char rx = piface_Read(PIFACE_GPIOB);
     while (rx == 0x00) {

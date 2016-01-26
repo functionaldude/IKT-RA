@@ -66,7 +66,7 @@ void UI::receive() {
     char tmp;
     while ((tmp = MorseHandler::morse_getc()) != '\0'){
         received = 1;
-        Logger::putc(tmp);
+        //Logger::putc(tmp);
     }
     Logger::putc('\n');
 }
