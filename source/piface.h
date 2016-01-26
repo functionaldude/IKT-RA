@@ -10,15 +10,23 @@
 // Start Config Sequence
 #define PIFACE_STARTW 0x40 //0100 000(no hardware addressing enabled) 0 -write
 #define PIFACE_STARTR 0x41 //0100 000 1-read
-#define PIFACE_BYTEMODE 0x10 //Change default SEQ to BYTEMODE
+#define PIFACE_BYTEMODE 0x30 //00 1-SEQOP disable 1-slew rate disabled 0000
 
 // Register Addresses
 #define PIFACE_IOCON 0x0A //IO config register - only needed for init(?)
+
 #define PIFACE_IODIRA 0x00 //IO Direction
 #define PIFACE_IPOLA 0x02 //Polarisation
 #define PIFACE_GPPUA 0x0C //Pull-Up
-#define PIFACE_GPIOA 0x12 //GPIO Set
+#define PIFACE_GPIOA 0x12 //GPIO A (output) Set
 #define PIFACE_OLATA 0x14 //Output latch
+
+#define PIFACE_IODIRB 0x01 //IO Direction
+#define PIFACE_IPOLB 0x03 //Polarisation
+#define PIFACE_GPPUB 0x0D //Pull-Up
+#define PIFACE_GPIOB 0x13 //GPIO A (output) Set
+#define PIFACE_OLATB 0x15 //Output latch
+
 
 //Pin Listing
 typedef enum{

@@ -8,7 +8,7 @@
 
 #include <stdint.h>
 
-#define UNIT 0xF8000
+#define UNIT 0xFFFFF
 #define DELAY_SHORT (1*UNIT)
 #define DELAY_LONG  (3*UNIT)
 
@@ -52,8 +52,6 @@ private:
     static void EIGHT();
     static void NINE();
     static void ZERO();
-
-    //TODO: numbers
 
     static void (*characters[26]) ();
     static void (*numbers[10]) ();

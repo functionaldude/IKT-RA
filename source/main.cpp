@@ -18,6 +18,11 @@ int main()
     Logger::debug("Program started");
 
     UI::start();
+    //piface_SetAsOutput(PIFACE_PIN0);
+    //piface_SetON(PIFACE_PIN0);
+    //unsigned char rx = piface_ReadPin(PIFACE_PIN7);
+    //Logger::putc(rx+'0');
+
 #pragma clang diagnostic pop
     return 0;
 }

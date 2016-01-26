@@ -16,7 +16,39 @@ void piface_Init(void){
     spi_transfer(PIFACE_BYTEMODE);
     spi_end();
 
-    //everything else seems to be OK as default
+    //clear everything
+    spi_begin();
+    spi_transfer(PIFACE_STARTW);
+    spi_transfer(PIFACE_GPIOA);
+    spi_transfer(0x00);
+    spi_end();
+    spi_begin();
+    spi_transfer(PIFACE_STARTW);
+    spi_transfer(PIFACE_GPIOB);
+    spi_transfer(0x00);
+    spi_end();
+
+    //set A as output
+    spi_begin();
+    spi_transfer(PIFACE_STARTW);
+    spi_transfer(PIFACE_IODIRA);
+    spi_transfer(0x00);
+    spi_end();
+
+    //enable pull-up for B
+    spi_begin();
+    spi_transfer(PIFACE_STARTW);
+    spi_transfer(PIFACE_GPPUB);
+    spi_transfer(0xFF);
+    spi_end();
+
+    //reverse polarity for B
+    spi_begin();
+    spi_transfer(PIFACE_STARTW);
+    spi_transfer(PIFACE_IPOLB);
+    spi_transfer(0xFF);
+    spi_end();
+
 }
 
 unsigned char piface_Read(unsigned char reg){
@@ -57,7 +89,7 @@ void piface_SetOFF(piface_pin pin){
 }
 
 unsigned char piface_ReadPin(piface_pin pin){
-    unsigned char rx = piface_Read(PIFACE_GPIOA);
+    unsigned char rx = piface_Read(PIFACE_GPIOB);
     if (rx&(1<<pin))
         return 1;
     else
