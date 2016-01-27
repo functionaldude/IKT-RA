@@ -12,7 +12,7 @@
 ARMGNU ?= arm-none-eabi
 
 X = 0
-SERIAL = ttyUSB0
+SERIAL = ttyUSB1
 ifdef USB
 	X = $(USB)
 endif

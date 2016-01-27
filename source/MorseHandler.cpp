@@ -74,7 +74,7 @@ void MorseHandler::init() {
     reverseTable[0][1][0][2][0] = 'R';
     reverseTable[0][0][0][2][0] = 'S';
     reverseTable[1][2][0][0][0] = 'T';
-    reverseTable[1][1][0][2][0] = 'U';
+    reverseTable[0][0][1][2][0] = 'U';
     reverseTable[0][0][0][1][2] = 'V';
     reverseTable[0][1][1][2][0] = 'W';
     reverseTable[1][0][0][1][2] = 'X';
@@ -391,14 +391,9 @@ void MorseHandler::morse_puts(const char *input){
 
 char MorseHandler::morse_getc() {
     uint8_t buffer[6] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-    uint8_t ctn = 0;
-    uint8_t timeCtn = 0;
+    uint8_t ctn = 1;
 
-    uint8_t tmp;
-    while ((tmp = listen()) == 2) {
-            if (timeCtn++ >= 20) return '\0';
-        //Logger::putc(tmp+'0');
-        }
+    if ((buffer[0] = listen()) == 2) return '\0';
     while ((buffer[ctn++] = listen()) != 2); //Logger::putc(buffer[ctn]+'0');
 
     return reverseTable[buffer[0]][buffer[1]][buffer[2]][buffer[3]][buffer[4]];
@@ -576,7 +571,7 @@ void MorseHandler::NINE() {
     mark_long();
     gap_inter();
 
-    mark_short();
+    mark_long();
     gap_inter();
 
     mark_short();

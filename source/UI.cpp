@@ -64,14 +64,15 @@ void UI::send() {
 
 void UI::receive() {
     memset(msg, 0x00, BUFFER);
-    uint16_t ctn = 0;
-    while ((msg[ctn++] = MorseHandler::morse_getc()) != '\0');
+    uint16_t ctn = 1;
+    uint8_t timeCtn = 0;
+    while ((msg[0] = MorseHandler::morse_getc()) == '\0'){
+        if (timeCtn++ >= TIMEOUT) return;
+    }
+    while ((msg[ctn++] = MorseHandler::morse_getc()) != '\0')
 
     if (msg[0] != 0x00) received = 1;
 
-    //for (int i = 0; i < ctn; i++) {
-        //Logger::putc(msg[i]+'0');
-    //}
     Logger::print(msg);
     Logger::putc('\n');
 }
