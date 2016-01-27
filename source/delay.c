@@ -3,8 +3,15 @@
 //
 
 #include "delay.h"
+#include "piface.h"
 
-void delay(volatile uint32_t value)
+void delay(volatile uint64_t value)
 {
-    for(;  value != 0; value--);
+    //for(;  value != 0; value--);
+    volatile uint64_t cnt = 0;
+    while (cnt < value) {
+        cnt++;
+        piface_Read(PIFACE_GPIOB);
+        if (cnt == value);
+    }
 }

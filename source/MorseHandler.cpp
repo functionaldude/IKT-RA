@@ -390,45 +390,45 @@ void MorseHandler::morse_puts(const char *input){
 }
 
 char MorseHandler::morse_getc() {
-    uint8_t buffer[5] = {0x00, 0x00, 0x00, 0x00, 0x00};
+    uint8_t buffer[6] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     uint8_t ctn = 0;
     uint8_t timeCtn = 0;
 
     uint8_t tmp;
     while ((tmp = listen()) == 2) {
             if (timeCtn++ >= 20) return '\0';
-        Logger::putc(tmp+'0');
+        //Logger::putc(tmp+'0');
         }
-    while ((buffer[ctn++] = listen()) != 2) Logger::putc(buffer[ctn]+'0');
+    while ((buffer[ctn++] = listen()) != 2); //Logger::putc(buffer[ctn]+'0');
 
     return reverseTable[buffer[0]][buffer[1]][buffer[2]][buffer[3]][buffer[4]];
 
 }
 
 uint8_t MorseHandler::listen() {
-    volatile uint32_t cnt_hi = 0;
-    volatile uint32_t cnt_lo = 0;
+    volatile uint64_t cnt_hi = 0;
+    volatile uint64_t cnt_lo = 0;
     //unsigned char rx = piface_ReadPin(PIFACE_PIN7);
     unsigned char rx = piface_Read(PIFACE_GPIOB);
-    while (rx == 0x00) {
-        cnt_lo++;
-        //rx = piface_ReadPin(PIFACE_PIN7);
-        rx = piface_Read(PIFACE_GPIOB);
-        //Logger::putc(rx+'0');
-        if (cnt_lo > 2 * UNIT) return 2;
-    }
-    while (rx != 0x00) {
+        while (rx == 0x00) {
+            cnt_lo++;
+            //rx = piface_ReadPin(PIFACE_PIN7);
+            rx = piface_Read(PIFACE_GPIOB);
+            //Logger::putc(rx+'0');
+            if (cnt_lo > 2 * UNIT) return 2;
+        }
+        while (rx != 0x00) {
             cnt_hi++;
             //rx = piface_ReadPin(PIFACE_PIN7);
             rx = piface_Read(PIFACE_GPIOB);
             //Logger::putc(rx+'0');
-    }
-    if (0 < cnt_hi && cnt_hi < UNIT * 2) {
+        }
+        if (0 < cnt_hi && cnt_hi < UNIT * 2) {
             return 0;
-    }
-    else if (cnt_hi) {
+        }
+        else if (cnt_hi) {
             return 1;
-    }
+        }
 }
 
 void MorseHandler::ZERO() {

@@ -69,6 +69,9 @@ void UI::receive() {
 
     if (msg[0] != 0x00) received = 1;
 
+    //for (int i = 0; i < ctn; i++) {
+        //Logger::putc(msg[i]+'0');
+    //}
     Logger::print(msg);
     Logger::putc('\n');
 }

@@ -8,9 +8,9 @@
 
 #include <stdint.h>
 
-#define UNIT 0xFFFFF
+#define UNIT 0xFF00
 #define DELAY_SHORT (1*UNIT)
-#define DELAY_LONG  (3*UNIT)
+#define DELAY_LONG  (4*UNIT)
 
 class MorseHandler {
 private:

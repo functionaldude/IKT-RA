@@ -7,6 +7,6 @@
 
 #include <stdint.h>
 
-void delay(volatile uint32_t value);
+void delay(volatile uint64_t value);
 
 #endif //MORSEPI_DELAY_H
