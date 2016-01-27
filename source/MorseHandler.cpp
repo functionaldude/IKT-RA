@@ -6,7 +6,7 @@
 #include "Logger.h"
 
 extern "C" {
-#include "gpio.h"
+#include "mmio.h"
 #include "delay.h"
 #include "piface.h"
 }
@@ -116,12 +116,12 @@ void MorseHandler::gap_char() {
 }
 
 void MorseHandler::HIGH() {
-    LED_OFF();
+    LED_ON();
     piface_Write(PIFACE_GPIOA,0xFF);
 }
 
 void MorseHandler::LOW() {
-    LED_ON();
+    LED_OFF();
     piface_Write(PIFACE_GPIOA,0x00);
 }
 

@@ -1,12 +1,8 @@
-/*
- * uart.c
- *
- *  Created on: 28.12.2015
- */
+//
+// Created by Zoltán Sasvári on 16.01.16.
+//
 
 #include "uart.h"
-#include <stddef.h>
-#include <stdint.h>
 #include "mmio.h"
 #include "delay.h"
 

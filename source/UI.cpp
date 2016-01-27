@@ -4,7 +4,6 @@
 
 #include "UI.h"
 #include "Logger.h"
-#include "helper.h"
 #include "MorseHandler.h"
 
 extern "C"{

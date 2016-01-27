@@ -5,13 +5,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
         source/main.cpp
-        source/testcases.cpp
-        source/testcases.h
-        source/helper.cpp
-        source/helper.h
-        source/BCM2835.h
-        source/gpio.c
-        source/gpio.h
         source/init.s
         source/uart.c
         source/uart.h
@@ -20,8 +13,6 @@ set(SOURCE_FILES
         source/delay.c
         source/Logger.cpp
         source/Logger.h
-        source/InputHandler.cpp
-        source/InputHandler.h
         source/MorseHandler.cpp
         source/MorseHandler.h
         source/UI.cpp

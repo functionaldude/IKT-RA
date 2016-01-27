@@ -3,8 +3,6 @@
 //
 
 #include "spi.h"
-#include "delay.h"
-#include "gpio.h"
 
 /*GPIO PINS
  */
@@ -54,8 +52,7 @@ volatile unsigned int *SPI0_DC      =  (unsigned int *) 0x20204014;
 
 void spi_pin_init(void)
 {
-    //unsigned int var;
-    /*
+    unsigned int var;
     //Read current value of GPFSEL1- pin 10 & 11
     var = *gpioGPFSEL1;
     var &=~((7<<0) | (7<<3)); // set as input pins GPIO = 000
@@ -69,15 +66,6 @@ void spi_pin_init(void)
     var |= ((4<<21) | (4<<24) | (4<<27)); // set to alt function ALT0, GPIO = 000
     //Write back updated value
     *gpioGPFSEL0 =var;
-    */
-
-
-    RPI_SetGpioPinFunction(RPI_GPIO7,FS_ALT0);
-    RPI_SetGpioPinFunction(RPI_GPIO8,FS_ALT0);
-    RPI_SetGpioPinFunction(RPI_GPIO9,FS_ALT0);
-    RPI_SetGpioPinFunction(RPI_GPIO10,FS_ALT0);
-    RPI_SetGpioPinFunction(RPI_GPIO11,FS_ALT0);
-
 }
 
 void spi_begin(void)
@@ -132,7 +120,7 @@ unsigned char spi_transfer(unsigned char value)
     ret = *SPI0_FIFO;
     // Clear RX FIFO
     var |= (1 << SPI_C_CLEAR_RX);
-    var = *SPI0_CONTROL;
+    *SPI0_CONTROL = var;
 
     return ret;
 
