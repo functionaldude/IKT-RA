@@ -88,7 +88,7 @@ void spi_begin(void)
 
     /* Write back updated value */
     *SPI0_CONTROL = var;
-    //set clock to 250kHz
+    //set clock
     *SPI0_CLK = 16;
 
     // Set TA = 1

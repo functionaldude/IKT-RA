@@ -109,7 +109,7 @@ void UI::start() {
 
 void UI::startKnightRider()
 {
-#define WAIT_DELAY 0x1F0000
+#define WAIT_DELAY 0x1F000
     piface_Write(PIFACE_IODIRA, 0x00);
 
     piface_SetON(PIFACE_PIN0);
@@ -154,8 +154,6 @@ void UI::startKnightRider()
     piface_SetON(PIFACE_PIN1);
     delay(WAIT_DELAY/8);
     piface_SetOFF(PIFACE_PIN1);
-
-    piface_Write(PIFACE_IODIRA, 0x01);
 
 #undef WAIT_DELAY
 }
